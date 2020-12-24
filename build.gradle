@@ -20,12 +20,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.7.0'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'org.apache.camel.springboot', name: 'camel-ftp-starter', version: '3.7.0'
+    compile group: 'org.apache.camel', name: 'camel-jackson', version: '3.7.0'
+    compile group: 'org.apache.camel', name: 'camel-csv', version: '3.7.0'
+    compile group: 'org.apache.camel', name: 'camel-jsonpath', version: '3.7.0'
 }
 
 test {
