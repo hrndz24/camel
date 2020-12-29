@@ -5,21 +5,25 @@ import org.apache.camel.model.dataformat.CsvDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 
 public class FileRouteBuilder extends RouteBuilder {
+
+    private String from;
+    private String to;
+
+    public FileRouteBuilder(String from, String to) {
+        this.from = from;
+        this.to = to;
+    }
+
     @Override
     public void configure() {
-        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
-
-        // lets shutdown faster in case of in-flight messages stack up
-        getContext().getShutdownStrategy().setTimeout(10);
-
         CsvDataFormat csvDataFormat = new CsvDataFormat();
         csvDataFormat.setDelimiter(",");
         csvDataFormat.setUseMaps("true");
 
-        from("{{file.from}}")
+        from(from)
                 .unmarshal(csvDataFormat)
                 .marshal()
                 .json(JsonLibrary.Jackson)
-                .to("{{file.to}}");
+                .to(to);
     }
 }
